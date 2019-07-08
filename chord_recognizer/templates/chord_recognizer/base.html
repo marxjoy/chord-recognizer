@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Chord Recognizer</title>
+<script async type="text/javascript" src="https://www.scales-chords.com/api/scales-chords-api.js"></script>
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    
+
+</head>
+<body class="container">
+    <div class="row text-center">
+    <div class="col">
+<h1>Guess the chord type. Root is {{ root }}</h1>
+         <div class="card bg-light">
+ <p>Play it</p>
+        <p>
+<ins class="scales_chords_api" chord="{{ root }}{{ type }}" instrument="piano" output="sound" ></ins>
+</p>
+<p>Score: {{ score }} / {{ total }}</p>
+</div>
+     
+    
+    <br>
+        
+          <form class='row' method="POST">
+        {% csrf_token %}
+               <input type="hidden" id="rootId" name="root" value="{{ root }}">
+               <input type="hidden" id="typeId" name="guess" value="{{ type }}">
+               <input type="hidden" id="scoreId" name="score" value="{{ score }}">
+               <input type="hidden" id="totalId" name="total" value="{{ total }}">
+    {% for note in notes %}
+  <div class='col'>
+   
+    <input class="form-control bg-primary" type="submit" name="choice" value="{{ note }}">
+  </div>
+    {% endfor %}
+       </form>
+        
+</div>
+        
+</div>
+      {% if message %}
+        <br>
+<div class="card bg-light" id="messagediv">
+<div class="card-body text-center">{{ message }}</div>           
+</div>
+      <script>alert('{{ message }}')</script>
+     {% endif %}  
+    
+  
+    <script>
+setTimeout(function() {
+    
+    $('#messagediv').fadeOut('fast');
+    $("ins").children().removeAttr("title");
+}, 2000); // <-- time in milliseconds</script>
+    <script>
+ 
+        
+        
+        setTimeout(function() {
+
+    $("ins").children().removeAttr("title");
+}, 1000); // <-- time in milliseconds
+    </script>
+</body>
+</html> 
