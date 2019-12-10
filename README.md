@@ -25,5 +25,6 @@ To run this project:
 ```
 pip3 install -r requirements.txt
 python manage.py runserver
+python manage.py migrate
 http://127.0.0.1:8000/chord_recognizer/
 ```
