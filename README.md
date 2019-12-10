@@ -16,6 +16,8 @@ Simple Django web app. App plays random type of chord in random key and allows u
 Project is created with:
 * Django version 2.0.3
 * Bootstrap version 4
+* Scales Chords API
+* JavaScript
 
 	
 ## Setup
